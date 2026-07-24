@@ -1,0 +1,6 @@
+hs_err_pid*
+.microfalx
+/.idea/
+/target/
+/**/target/
+/**/*.iml
