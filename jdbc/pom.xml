@@ -35,7 +35,11 @@
 
     <dependencies>
 
-      
+        <dependency>
+            <groupId>net.microfalx.registry</groupId>
+            <artifactId>registry-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
     </dependencies>
 

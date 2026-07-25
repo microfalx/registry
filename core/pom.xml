@@ -35,7 +35,41 @@
 
     <dependencies>
 
-      
+        <dependency>
+            <groupId>net.microfalx.registry</groupId>
+            <artifactId>registry-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.microfalx</groupId>
+            <artifactId>metrics</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.microfalx</groupId>
+            <artifactId>threadpool</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
 
     </dependencies>
 
