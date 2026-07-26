@@ -33,10 +33,34 @@
     <name>Registry :: BOM</name>
     <description>The BOM</description>
 
-    <dependencies>
+    <dependencyManagement>
+        <dependencies>
 
-      
+            <dependency>
+                <groupId>net.microfalx.registry</groupId>
+                <artifactId>registry-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
-    </dependencies>
+            <dependency>
+                <groupId>net.microfalx.registry</groupId>
+                <artifactId>registry-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.microfalx.registry</groupId>
+                <artifactId>registry-jdbc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.microfalx.registry</groupId>
+                <artifactId>registry-valkey</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
 </project>
