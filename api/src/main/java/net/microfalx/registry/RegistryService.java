@@ -10,7 +10,7 @@ import java.util.List;
 public interface RegistryService extends Service {
 
     static RegistryService getInstance() {
-        return Service.load(RegistryService.class);
+        return Service.lookup(RegistryService.class);
     }
 
     /**
