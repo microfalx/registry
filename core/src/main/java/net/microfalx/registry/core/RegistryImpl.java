@@ -90,12 +90,26 @@ final class RegistryImpl implements Registry {
     }
 
     @Override
+    public Data create(String path) {
+        requireNotEmpty(path);
+        path = normalizePath(path);
+        return new DataImpl(path);
+    }
+
+    @Override
     public void set(Data data) {
         requireNonNull(data);
         String path = normalizePath(data.getNode().getPath());
         Storage storage = getStorage();
         byte[] json = getSerde().asBytes((((DataImpl) data).attributes));
         storage.put(path, json);
+    }
+
+    @Override
+    public <T> void set(String path, T data) {
+        Data dataNode = create(path);
+        dataNode.set(data);
+        set(dataNode);
     }
 
     private boolean walkInternal(String path, int depth, BiFunction<String, Node, Boolean> visitor, Storage storage) {

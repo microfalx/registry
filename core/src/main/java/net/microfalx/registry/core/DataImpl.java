@@ -57,8 +57,9 @@ final class DataImpl implements Data {
     @SuppressWarnings("unchecked")
     @Override
     public <T> T get() {
-        String valueAsString = (String) attributes.get(DATA_VALUE_ATTR);
-        if (isNotEmpty(valueAsString)) {
+        Object value = attributes.get(DATA_VALUE_ATTR);
+        if (value == null) return null;
+        if (value instanceof String valueAsString) {
             String dataTypeClassName = (String) attributes.get(DATA_TYPE_ATTR);
             try {
                 Class<?> dataTypeClass = getClass().getClassLoader().loadClass(dataTypeClassName);
@@ -69,7 +70,7 @@ final class DataImpl implements Data {
                 throw new RegistryException("Cannot deserialize class " + dataTypeClassName, e);
             }
         } else {
-            return null;
+            return (T) value;
         }
     }
 

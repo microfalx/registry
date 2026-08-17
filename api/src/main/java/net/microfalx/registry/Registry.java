@@ -74,12 +74,20 @@ public interface Registry {
     Optional<Data> get(String path);
 
     /**
-     * Returns the data available in the registry at a given path or creates a new object if neederd.
+     * Returns the data available in the registry at a given path or creates a new object if needed.
      *
-     * @param path the path
-     * @return an optional  data
+     * @param path the path where the new data object should be retrieved or created
+     * @return a non-nul instance
      */
     Data getOrCreate(String path);
+
+    /**
+     * Creates a new data object at the specified path in the registry.
+     *
+     * @param path the path where the new data object should be created
+     * @return a non-null instance
+     */
+    Data create(String path);
 
     /**
      * Changes the node's data.
@@ -87,6 +95,14 @@ public interface Registry {
      * @param data the new data
      */
     void set(Data data);
+
+    /**
+     * Changes the node's data.
+     *
+     * @param path the path where the new data should be set
+     * @param data the new data
+     */
+    <T> void set(String path, T data);
 
     /**
      * Returns the storage used by this registry.
