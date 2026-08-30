@@ -7,6 +7,7 @@ import net.microfalx.lang.ClassUtils;
 import net.microfalx.lang.Initializable;
 import net.microfalx.lang.ObjectUtils;
 import net.microfalx.lang.annotation.Provider;
+import net.microfalx.lang.service.Lifecycle;
 import net.microfalx.registry.Registry;
 import net.microfalx.registry.RegistryService;
 import net.microfalx.registry.Serde;
@@ -26,7 +27,7 @@ import static net.microfalx.lang.ClassUtils.resolveProviderInstances;
 
 @Slf4j
 @Provider
-public class RegistryServiceImpl implements RegistryService, Initializable {
+public class RegistryServiceImpl implements Lifecycle, RegistryService, Initializable {
 
     private final List<Storage> storages;
 

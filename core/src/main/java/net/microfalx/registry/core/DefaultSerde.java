@@ -1,6 +1,7 @@
 package net.microfalx.registry.core;
 
 import net.microfalx.lang.AnnotationUtils;
+import net.microfalx.lang.Initializable;
 import net.microfalx.lang.ObjectUtils;
 import net.microfalx.lang.StringUtils;
 import net.microfalx.lang.annotation.Order;
@@ -20,7 +21,7 @@ import static net.microfalx.lang.ArgumentUtils.requireNonNull;
 
 @Provider
 @Order(Order.AFTER - 10)
-public class DefaultSerde implements Serde {
+public class DefaultSerde implements Serde, Initializable {
 
     private static final String BINARY_SERIALIZATION = "BINARY:";
 
@@ -82,6 +83,14 @@ public class DefaultSerde implements Serde {
         }
     }
 
+    @Override
+    public void initialize(Object... context) {
+        Serde delegate = getDelegate();
+        if (delegate instanceof Initializable initializable) {
+            initializable.initialize(context);
+        }
+    }
+
     private byte[] serializeBinary(Object value) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         try (ObjectOutputStream out = new ObjectOutputStream(bos)) {
@@ -135,7 +144,6 @@ public class DefaultSerde implements Serde {
     private Serde getDelegate() {
         if (delegate == null) {
             delegate = new JsonSerde();
-            ((JsonSerde) delegate).initialize();
         }
         return delegate;
     }
