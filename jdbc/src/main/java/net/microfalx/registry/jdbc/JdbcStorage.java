@@ -1,6 +1,7 @@
 package net.microfalx.registry.jdbc;
 
 import net.microfalx.lang.annotation.Provider;
+import net.microfalx.lang.annotation.SizeOf;
 import net.microfalx.registry.Node;
 import net.microfalx.registry.core.AbstractStorage;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Provider
+@SizeOf
 public class JdbcStorage extends AbstractStorage {
 
     @Override

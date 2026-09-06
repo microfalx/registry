@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import net.microfalx.lang.Initializable;
 import net.microfalx.lang.annotation.Order;
 import net.microfalx.lang.annotation.Provider;
+import net.microfalx.lang.annotation.SizeOf;
 import net.microfalx.registry.Serde;
 
 import java.io.ByteArrayInputStream;
@@ -20,6 +21,7 @@ import static net.microfalx.lang.ExceptionUtils.rethrowExceptionAndReturn;
 
 @Provider
 @Order(Order.AFTER)
+@SizeOf(shallow = false, deepSize = 5000)
 public class JsonSerde implements Serde, Initializable {
 
     private ObjectMapper objectMapper;

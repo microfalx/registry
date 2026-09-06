@@ -6,6 +6,7 @@ import net.microfalx.lang.ObjectUtils;
 import net.microfalx.lang.StringUtils;
 import net.microfalx.lang.annotation.Order;
 import net.microfalx.lang.annotation.Provider;
+import net.microfalx.lang.annotation.SizeOf;
 import net.microfalx.lang.annotation.Version;
 import net.microfalx.registry.RegistryException;
 import net.microfalx.registry.Serde;
@@ -21,6 +22,7 @@ import static net.microfalx.lang.ArgumentUtils.requireNonNull;
 
 @Provider
 @Order(Order.AFTER - 10)
+@SizeOf(shallow = false, deepSize = 100)
 public class DefaultSerde implements Serde, Initializable {
 
     private static final String BINARY_SERIALIZATION = "BINARY:";

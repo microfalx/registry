@@ -1,5 +1,6 @@
 package net.microfalx.registry.core;
 
+import net.microfalx.lang.annotation.SizeOf;
 import net.microfalx.registry.*;
 
 import java.util.Collection;
@@ -13,6 +14,7 @@ import static net.microfalx.lang.ArgumentUtils.requireNonNull;
 import static net.microfalx.lang.ArgumentUtils.requireNotEmpty;
 import static net.microfalx.registry.core.RegistryUtils.normalizePath;
 
+@SizeOf(shallow = false, deepSize = 100)
 final class RegistryImpl implements Registry {
 
     private final RegistryService registryService;
@@ -24,10 +26,11 @@ final class RegistryImpl implements Registry {
         this.storage = null;
     }
 
-    RegistryImpl(Storage storage) {
+    RegistryImpl(RegistryService registryService, Storage storage) {
+        requireNonNull(registryService);
         requireNonNull(storage);
+        this.registryService = registryService;
         this.storage = storage;
-        this.registryService = null;
     }
 
     @Override

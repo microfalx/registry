@@ -3,6 +3,7 @@ package net.microfalx.registry.core;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
+import net.microfalx.lang.annotation.SizeOf;
 import net.microfalx.registry.Node;
 import net.microfalx.registry.Storage;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
 public abstract class AbstractStorage implements Storage {
 
     @Data
+    @SizeOf(shallow = false, deepSize = 400)
     protected static class StorageNode implements Node {
 
         private final long id;

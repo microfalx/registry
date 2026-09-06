@@ -42,6 +42,11 @@ public class RegistryServiceImpl implements Service.Lifecycle, RegistryService, 
         this.storages = new ArrayList<>(storages);
     }
 
+    @Override
+    public Registry getRegistry(Storage storage) {
+        return new RegistryImpl(this, storage);
+    }
+
     public List<Storage> getStorages() {
         return unmodifiableList(storages);
     }

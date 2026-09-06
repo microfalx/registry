@@ -21,6 +21,13 @@ public interface RegistryService extends Service {
     Registry getRegistry();
 
     /**
+     * Returns a registry which uses a specific storage.
+     *
+     * @return a non-null instance
+     */
+    Registry getRegistry(Storage storage);
+
+    /**
      * Returns the registered storages.
      *
      * @return a non-null instance
