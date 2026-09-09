@@ -1,10 +1,10 @@
 package net.microfalx.registry.core;
 
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import net.microfalx.lang.ClassUtils;
 import net.microfalx.lang.Initializable;
 import net.microfalx.lang.annotation.Provider;
+import net.microfalx.lang.service.Logger;
 import net.microfalx.lang.service.Service;
 import net.microfalx.registry.Registry;
 import net.microfalx.registry.RegistryService;
@@ -23,9 +23,10 @@ import static java.util.Collections.unmodifiableList;
 import static net.microfalx.lang.ArgumentUtils.requireNonNull;
 import static net.microfalx.lang.ClassUtils.resolveProviderInstances;
 
-@Slf4j
 @Provider
 public class RegistryServiceImpl implements Service.Lifecycle, RegistryService, Initializable {
+
+    private static final net.microfalx.lang.service.Logger LOGGER = Logger.get(RegistryServiceImpl.class);
 
     private final List<Storage> storages;
 
@@ -97,7 +98,7 @@ public class RegistryServiceImpl implements Service.Lifecycle, RegistryService, 
         if (serde instanceof Initializable) {
             ((Initializable) serde).initialize();
         }
-        LOGGER.info("Use registry serde {}", ClassUtils.getName(serde));
+        LOGGER.debug("Use registry serde {}", ClassUtils.getName(serde));
     }
 
     private void maintenance() {
