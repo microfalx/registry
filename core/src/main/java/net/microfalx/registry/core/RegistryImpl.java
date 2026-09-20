@@ -1,6 +1,8 @@
 package net.microfalx.registry.core;
 
 import net.microfalx.lang.annotation.SizeOf;
+import net.microfalx.lang.service.Service;
+import net.microfalx.lang.service.ServiceLocator;
 import net.microfalx.registry.*;
 
 import java.util.Collection;
@@ -38,6 +40,7 @@ final class RegistryImpl implements Registry {
         requireNotEmpty(path);
         requireNonNull(visitor);
         Storage storage = getStorage();
+        trackOperation();
         return walkInternal(path, depth, visitor, storage);
     }
 
@@ -52,6 +55,7 @@ final class RegistryImpl implements Registry {
         requireNotEmpty(path);
         requireNonNull(filter);
         path = normalizePath(path);
+        trackOperation();
         Storage storage = getStorage();
         Collection<Node> children = storage.getChildren(path, false);
         return children.stream()
@@ -64,6 +68,7 @@ final class RegistryImpl implements Registry {
     public boolean exists(String path) {
         requireNotEmpty(path);
         path = normalizePath(path);
+        trackOperation();
         Storage storage = getStorage();
         return storage.exists(path);
     }
@@ -73,6 +78,7 @@ final class RegistryImpl implements Registry {
         requireNotEmpty(path);
         path = normalizePath(path);
         Storage storage = getStorage();
+        trackOperation();
         return storage.getNode(path);
     }
 
@@ -80,6 +86,7 @@ final class RegistryImpl implements Registry {
     public Optional<Data> get(String path) {
         requireNotEmpty(path);
         path = normalizePath(path);
+        ServiceLocator.report(registryService, Service.Metric.EVENT_OUT);
         Optional<Node> node = lookup(path);
         return node.map(this::toData);
     }
@@ -103,6 +110,7 @@ final class RegistryImpl implements Registry {
     public void set(Data data) {
         requireNonNull(data);
         String path = normalizePath(data.getNode().getPath());
+        ServiceLocator.report(registryService, Service.Metric.EVENT_IN);
         Storage storage = getStorage();
         byte[] json = getSerde().asBytes((((DataImpl) data).attributes));
         storage.put(path, json);
@@ -143,6 +151,11 @@ final class RegistryImpl implements Registry {
 
     Serde getSerde() {
         return registryService.getSerde();
+    }
+
+
+    private void trackOperation() {
+        ServiceLocator.report(registryService, Service.Metric.SUCCESS);
     }
 
 }
