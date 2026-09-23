@@ -4,8 +4,8 @@ import lombok.Getter;
 import net.microfalx.lang.ClassUtils;
 import net.microfalx.lang.Initializable;
 import net.microfalx.lang.annotation.Provider;
-import net.microfalx.lang.service.Logger;
-import net.microfalx.lang.service.Service;
+import net.microfalx.service.api.Logger;
+import net.microfalx.service.api.Service;
 import net.microfalx.registry.Registry;
 import net.microfalx.registry.RegistryService;
 import net.microfalx.registry.Serde;
@@ -26,7 +26,7 @@ import static net.microfalx.lang.ClassUtils.resolveProviderInstances;
 @Provider
 public class RegistryServiceImpl implements Service.Lifecycle, RegistryService, Initializable {
 
-    private static final net.microfalx.lang.service.Logger LOGGER = Logger.get(RegistryServiceImpl.class);
+    private static final net.microfalx.service.api.Logger LOGGER = Logger.get(RegistryServiceImpl.class);
 
     private final List<Storage> storages;
 

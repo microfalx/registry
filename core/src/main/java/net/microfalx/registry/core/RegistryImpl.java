@@ -1,9 +1,8 @@
 package net.microfalx.registry.core;
 
 import net.microfalx.lang.annotation.SizeOf;
-import net.microfalx.lang.service.Service;
-import net.microfalx.lang.service.ServiceLocator;
 import net.microfalx.registry.*;
+import net.microfalx.service.api.Service;
 
 import java.util.Collection;
 import java.util.Map;
@@ -86,7 +85,7 @@ final class RegistryImpl implements Registry {
     public Optional<Data> get(String path) {
         requireNotEmpty(path);
         path = normalizePath(path);
-        ServiceLocator.report(registryService, Service.Metric.EVENT_OUT);
+        registryService.report(Service.Metric.EVENT_OUT);
         Optional<Node> node = lookup(path);
         return node.map(this::toData);
     }
@@ -110,7 +109,7 @@ final class RegistryImpl implements Registry {
     public void set(Data data) {
         requireNonNull(data);
         String path = normalizePath(data.getNode().getPath());
-        ServiceLocator.report(registryService, Service.Metric.EVENT_IN);
+        registryService.report(Service.Metric.EVENT_IN);
         Storage storage = getStorage();
         byte[] json = getSerde().asBytes((((DataImpl) data).attributes));
         storage.put(path, json);
@@ -155,7 +154,7 @@ final class RegistryImpl implements Registry {
 
 
     private void trackOperation() {
-        ServiceLocator.report(registryService, Service.Metric.SUCCESS);
+        registryService.report(Service.Metric.SUCCESS);
     }
 
 }

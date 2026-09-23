@@ -63,6 +63,11 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>net.microfalx.service</groupId>
+            <artifactId>service-api</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

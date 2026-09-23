@@ -1,6 +1,6 @@
 package net.microfalx.registry;
 
-import net.microfalx.lang.service.ServiceException;
+import net.microfalx.service.api.ServiceException;
 
 /**
  * Base exception for all registry failures.
