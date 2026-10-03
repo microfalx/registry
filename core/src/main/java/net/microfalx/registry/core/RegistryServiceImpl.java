@@ -4,12 +4,12 @@ import lombok.Getter;
 import net.microfalx.lang.ClassUtils;
 import net.microfalx.lang.Initializable;
 import net.microfalx.lang.annotation.Provider;
-import net.microfalx.service.api.Logger;
-import net.microfalx.service.api.Service;
 import net.microfalx.registry.Registry;
 import net.microfalx.registry.RegistryService;
 import net.microfalx.registry.Serde;
 import net.microfalx.registry.Storage;
+import net.microfalx.service.api.Logger;
+import net.microfalx.service.api.Service;
 import net.microfalx.threadpool.ThreadPool;
 import net.microfalx.threadpool.Trigger;
 
@@ -55,6 +55,13 @@ public class RegistryServiceImpl implements Service.Lifecycle, RegistryService, 
     public Storage getStorage() {
         if (storage == null) selectStorage();
         return storage;
+    }
+
+    @Override
+    public void setStorage(Storage storage) {
+        requireNonNull(storage);
+        this.storage = storage;
+        LOGGER.info("Replace registry storage {}", ClassUtils.getName(storage));
     }
 
     @Override

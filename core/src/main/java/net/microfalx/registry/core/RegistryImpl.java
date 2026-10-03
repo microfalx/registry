@@ -109,6 +109,7 @@ final class RegistryImpl implements Registry {
     public void set(Data data) {
         requireNonNull(data);
         String path = normalizePath(data.getNode().getPath());
+        data.setAttribute(DataImpl.DATA_PATH_ATTR, path);
         registryService.report(Service.Metric.EVENT_IN);
         Storage storage = getStorage();
         byte[] json = getSerde().asBytes((((DataImpl) data).attributes));

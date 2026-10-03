@@ -42,6 +42,13 @@ public interface RegistryService extends Service {
     Storage getStorage();
 
     /**
+     * Changes the current storage.
+     *
+     * @param storage the storage to set
+     */
+    void setStorage(Storage storage);
+
+    /**
      * Returns the serialization interface.
      *
      * @return a non-null instance

@@ -12,14 +12,14 @@ import java.util.Map;
 
 import static net.microfalx.lang.ArgumentUtils.requireNonNull;
 import static net.microfalx.lang.ArgumentUtils.requireNotEmpty;
-import static net.microfalx.lang.StringUtils.isNotEmpty;
 
 @Getter
 @ToString
 final class DataImpl implements Data {
 
-    private static final String DATA_VALUE_ATTR = "$DATA_VALUE$";
-    private static final String DATA_TYPE_ATTR = "$DATA_CLASS$";
+     static final String DATA_VALUE_ATTR = "$DATA_VALUE$";
+     static final String DATA_TYPE_ATTR = "$DATA_CLASS$";
+     static final String DATA_PATH_ATTR = "$DATA_PATH$";
 
     private final NodeImpl node;
     private final boolean exists;
@@ -36,7 +36,7 @@ final class DataImpl implements Data {
     DataImpl(NodeImpl node, Map<String, Object> attributes) {
         this.node = node;
         this.exists = true;
-        this.attributes.putAll(attributes);
+        if (attributes != null) this.attributes.putAll(attributes);
     }
 
     DataImpl(String path) {
