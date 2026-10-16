@@ -80,6 +80,7 @@
         <tracing.version>1.0.2-SNAPSHOT</tracing.version>
         <service.version>1.0.0-SNAPSHOT</service.version>
         <threadpool.version>1.0.2-SNAPSHOT</threadpool.version>
+        <database.version>1.0.0-SNAPSHOT</database.version>
 
         <jacoco.file>jacoco.exec</jacoco.file>
         <jacoco.ut.dest>${project.build.directory}/${jacoco.file}</jacoco.ut.dest>
@@ -126,6 +127,12 @@
                 <groupId>net.microfalx</groupId>
                 <artifactId>threadpool</artifactId>
                 <version>${threadpool.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.microfalx</groupId>
+                <artifactId>database</artifactId>
+                <version>${database.version}</version>
             </dependency>
 
             <dependency>

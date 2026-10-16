@@ -1,5 +1,6 @@
 package net.microfalx.registry.valkey;
 
+import net.microfalx.lang.annotation.Order;
 import net.microfalx.lang.annotation.Provider;
 import net.microfalx.registry.Node;
 import net.microfalx.registry.core.AbstractStorage;
@@ -8,6 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+@Order(Order.LOW)
 @Provider
 public class ValkeyStorage extends AbstractStorage {
 
