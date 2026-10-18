@@ -47,4 +47,9 @@ public class ValkeyStorage extends AbstractStorage {
     public void remove(String path) {
 
     }
+
+    @Override
+    public boolean isAvailable() {
+        return false;
+    }
 }

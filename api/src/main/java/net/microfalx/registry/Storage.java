@@ -76,4 +76,11 @@ public interface Storage {
      * @param path the path
      */
     void remove(String path);
+
+    /**
+     * Returns whether the storage is available to be used to store registry data.
+     *
+     * @return {@code true} if available, {@code false} otherwise
+     */
+    boolean isAvailable();
 }

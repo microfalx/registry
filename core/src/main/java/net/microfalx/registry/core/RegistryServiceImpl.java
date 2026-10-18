@@ -90,6 +90,10 @@ public class RegistryServiceImpl implements Service.Lifecycle, RegistryService, 
                 LOGGER.info("Registry storage {} is disabled, skip it", ClassUtils.getName(currentStorage));
                 continue;
             }
+            if (!currentStorage.isAvailable()) {
+                LOGGER.info("Registry storage {} is unavailable, skip it", ClassUtils.getName(currentStorage));
+                continue;
+            }
             storage = currentStorage;
             break;
         }

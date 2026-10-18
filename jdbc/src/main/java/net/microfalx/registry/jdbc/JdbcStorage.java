@@ -1,5 +1,6 @@
 package net.microfalx.registry.jdbc;
 
+import net.microfalx.database.Database;
 import net.microfalx.database.DatabaseService;
 import net.microfalx.database.Query;
 import net.microfalx.database.QueryProvider;
@@ -29,7 +30,8 @@ public class JdbcStorage extends AbstractStorage {
     private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
 
     public JdbcStorage() {
-        queryProvider = DatabaseService.getInstance().getDefaultDatabase().getQueryProvider();
+        queryProvider = DatabaseService.getInstance().getDefaultDatabase()
+                .map(Database::getQueryProvider).orElse(null);
     }
 
     public JdbcStorage(QueryProvider queryProvider) {
@@ -116,6 +118,11 @@ public class JdbcStorage extends AbstractStorage {
             queryProvider.withResource("registry.remove_node.sql").parameter(1, id).update();
             nodeIds.remove(getNaturalId(normalizedPath));
         }
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return queryProvider != null;
     }
 
     private AbstractStorage.StorageNode mapToStorageNode(ResultSet rs) throws SQLException {

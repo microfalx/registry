@@ -1,7 +1,5 @@
 package net.microfalx.registry.core;
 
-import net.microfalx.lang.StringUtils;
-import net.microfalx.lang.UriUtils;
 import net.microfalx.lang.annotation.Order;
 import net.microfalx.lang.annotation.Provider;
 import net.microfalx.registry.Node;
@@ -87,6 +85,11 @@ public class MemoryStorage extends AbstractStorage {
     public void remove(String path) {
         String normalizedPath = normalizePath(path);
         nodes.remove(normalizedPath);
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return true;
     }
 
     private boolean isChild(String parentPath, String childPath, boolean recursive) {
